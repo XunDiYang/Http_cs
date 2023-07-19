@@ -28,7 +28,7 @@ public class HttpServer extends TcpServer{
         handler = new Handler();
     }
 
-    class HttpHandleClient implements HandleClient{
+    public class HttpHandleClient implements HandleClient{
         Socket client;
         volatile boolean runHandleClient = true;
         public void init(Socket s) {
@@ -83,7 +83,7 @@ public class HttpServer extends TcpServer{
                     e.printStackTrace();
                 }
             }
-            Log.e(TAG, "关闭：" + client.getRemoteSocketAddress());
+            Log.d(TAG, "关闭：" + client.getRemoteSocketAddress());
         }
     }
 }

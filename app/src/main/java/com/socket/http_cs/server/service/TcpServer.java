@@ -28,7 +28,7 @@ public class TcpServer {
         mExecutorService = Executors.newFixedThreadPool(5);
         try {
             serverSocket = new ServerSocket(serverPort);
-            Log.e(TAG, "服务器启动成功");
+            Log.d(TAG, "服务器启动成功");
         } catch (IOException e) {
             Log.e(TAG, "服务器启动失败" + e.getMessage());
             throw new RuntimeException(e);
