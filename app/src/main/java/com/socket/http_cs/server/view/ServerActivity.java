@@ -1,4 +1,4 @@
-package com.socket.http_cs.server.view;
+package com.socket.http_server_client.server.view;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -10,19 +10,19 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.socket.http_cs.R;
-import com.socket.http_cs.model.CMessage;
-import com.socket.http_cs.model.MsgType;
-import com.socket.http_cs.server.callback.Callback;
-import com.socket.http_cs.server.service.HttpServer;
-import com.socket.http_cs.server.service.TcpServer;
+import com.socket.http_server_client.R;
+import com.socket.http_server_client.model.CMessage;
+import com.socket.http_server_client.model.MsgType;
+import com.socket.http_server_client.server.callback.Callback;
+import com.socket.http_server_client.server.service.HttpServer;
+import com.socket.http_server_client.server.service.TcpServer;
 
 import java.io.IOException;
 
 public class ServerActivity extends AppCompatActivity {
     private String serverIp;
     private int serverPort;
-    private HttpServer mHttpServer;
+    private HttpServer httpServer;
     private TextView txtRcvMsg;
     private TextView txtlocalip;
 
@@ -61,17 +61,17 @@ public class ServerActivity extends AppCompatActivity {
         txtRcvMsg = findViewById(R.id.rcvMsg);
         txtRcvMsg.setMovementMethod(ScrollingMovementMethod.getInstance());
 
+        httpServer = new HttpServer(serverIp,serverPort,rcvMsgCallback);
+        httpServer.start();
 
-        mHttpServer = new HttpServer(serverIp, serverPort, rcvMsgCallback);
-        mHttpServer.start();
     }
 
     @Override
     public void finish() {
         super.finish();
-        Log.d(TAG, "关闭服务器服务");
+        Log.i(TAG, "关闭服务器服务");
         try {
-            mHttpServer.stop();
+            httpServer.stop();
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
