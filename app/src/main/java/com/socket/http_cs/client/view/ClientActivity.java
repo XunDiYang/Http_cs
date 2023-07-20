@@ -1,4 +1,4 @@
-package com.socket.http_cs.client.view;
+package com.socket.http_server_client.client.view;
 
 import android.annotation.SuppressLint;
 import android.content.Intent;
@@ -13,13 +13,13 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.socket.http_cs.R;
-import com.socket.http_cs.client.callback.ReadingCallback;
-import com.socket.http_cs.client.callback.ErrorCallback;
-import com.socket.http_cs.client.callback.WritingCallback;
-import com.socket.http_cs.client.service.LongLiveSocket;
-import com.socket.http_cs.model.CMessage;
-import com.socket.http_cs.model.MsgType;
+import com.socket.http_server_client.R;
+import com.socket.http_server_client.client.callback.ReadingCallback;
+import com.socket.http_server_client.client.callback.ErrorCallback;
+import com.socket.http_server_client.client.callback.WritingCallback;
+import com.socket.http_server_client.client.service.LongLiveSocket;
+import com.socket.http_server_client.model.CMessage;
+import com.socket.http_server_client.model.MsgType;
 
 public class ClientActivity extends AppCompatActivity {
     private String TAG = "CLIENT";
@@ -64,23 +64,22 @@ public class ClientActivity extends AppCompatActivity {
             WritingCallback writingCallback = new WritingCallback() {
                 @Override
                 public void onSuccess() {
-                    Log.d(TAG, "onSuccess: 发送成功");
+                    Log.i(TAG, "onSuccess: 发送成功");
                 }
 
                 @Override
-                public void onFail(CMessage cMsg) {
-                    Log.w(TAG, "onFail: fail to write: " + cMsg.toJsonStr());
+                public void onFail(Object cMsg) {
+                    Log.w(TAG, "onFail: fail to write: " + ((CMessage)cMsg).toJsonStr());
                 }
             };
-//            TODO: 如何调用write，估计用handler
             clientThread.write(cMessage, writingCallback);
         });
     }
 
     @Override
     public void finish() {
-        super.finish();
         clientThread.interrupt();
+        super.finish();
     }
 
     private ReadingCallback readingCallback = (cMsg) -> {
@@ -89,14 +88,14 @@ public class ClientActivity extends AppCompatActivity {
             Toast.makeText(ClientActivity.this, "连接成功", Toast.LENGTH_SHORT).show();
         }
         else if (cMsg.getCode() == 200) {
-            Log.d(TAG, "EchoClient: received: " + cMsg.toString());
+            Log.i(TAG, "EchoClient: received: " + cMsg.toString());
             Toast.makeText(ClientActivity.this, "收到回复", Toast.LENGTH_SHORT).show();
             if (cMsg.getType() == MsgType.TEXT && !cMsg.getMsg().isEmpty()) {
                 String txt = "服务器反馈：" + cMsg.getMsg() + "\n" + txtRcvMsg.getText().toString();
                 txtRcvMsg.setText(txt);
             }
         } else {
-            Log.d(TAG, "EchoClient: received: " + cMsg.toString());
+            Log.i(TAG, "EchoClient: received: " + cMsg.toString());
             Toast.makeText(ClientActivity.this, "服务器端错误", Toast.LENGTH_SHORT).show();
         }
     };
