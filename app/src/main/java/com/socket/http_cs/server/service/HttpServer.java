@@ -53,6 +53,7 @@ public class HttpServer extends TcpServer {
         public void initClientSocket(Socket s){
             client = s;
             runHandleClient = true;
+            handler.post(() -> rcvMsgCallback.onEvent(new CMessage("","",100,MsgType.CONNECT,""), null));
         }
 
         @Override

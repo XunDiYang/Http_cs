@@ -34,7 +34,7 @@ public class ServerActivity extends AppCompatActivity {
                 Toast.makeText(ServerActivity.this, "客户端接入", Toast.LENGTH_SHORT).show();
             } else if (cMessage.getCode() == 200) {
                 if (cMessage.getType() == MsgType.TEXT && !cMessage.getMsg().isEmpty()) {
-                    Toast.makeText(ServerActivity.this, "连接成功", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(ServerActivity.this, "收到信息", Toast.LENGTH_SHORT).show();
                     String txt = "服务器已收到消息" + cMessage.getMsg() + "\n" + txtRcvMsg.getText().toString();
                     txtRcvMsg.setText(txt);
                 }
@@ -68,12 +68,13 @@ public class ServerActivity extends AppCompatActivity {
 
     @Override
     public void finish() {
-        super.finish();
         Log.i(TAG, "关闭服务器服务");
         try {
             httpServer.stop();
         } catch (IOException e) {
             throw new RuntimeException(e);
+        } finally {
+            super.finish();
         }
     }
 

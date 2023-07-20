@@ -67,6 +67,7 @@ public final class LongLiveSocket extends Thread {
         } catch (IOException e) {
             Log.e(TAG, "initSocket: ", e);
             mUIHandler.post(() -> mErrorCallback.onError());
+            stopServerSocket();
         }
     }
 
