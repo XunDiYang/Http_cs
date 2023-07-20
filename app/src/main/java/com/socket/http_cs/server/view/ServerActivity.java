@@ -1,4 +1,4 @@
-package com.socket.http_server_client.server.view;
+package com.socket.http_cs.server.view;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -10,12 +10,12 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.socket.http_server_client.R;
-import com.socket.http_server_client.model.CMessage;
-import com.socket.http_server_client.model.MsgType;
-import com.socket.http_server_client.server.callback.Callback;
-import com.socket.http_server_client.server.service.HttpServer;
-import com.socket.http_server_client.server.service.TcpServer;
+import com.socket.http_cs.R;
+import com.socket.http_cs.model.CMessage;
+import com.socket.http_cs.model.MsgType;
+import com.socket.http_cs.server.callback.Callback;
+import com.socket.http_cs.server.service.HttpServer;
+import com.socket.http_cs.server.service.TcpServer;
 
 import java.io.IOException;
 

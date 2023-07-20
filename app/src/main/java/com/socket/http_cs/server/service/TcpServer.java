@@ -1,4 +1,4 @@
-package com.socket.http_server_client.server.service;
+package com.socket.http_cs.server.service;
 
 import android.os.Handler;
 import android.util.Log;

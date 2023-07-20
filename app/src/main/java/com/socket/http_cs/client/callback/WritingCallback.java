@@ -8,5 +8,5 @@ import com.socket.http_cs.model.CMessage;
 public interface WritingCallback {
     void onSuccess();
 
-    void onFail(CMessage cMessage);
+    void onFail(Object cMessage);
 }

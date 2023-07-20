@@ -1,4 +1,4 @@
-package com.socket.http_server_client.model;
+package com.socket.http_cs.model;
 
 import java.util.Arrays;
 import java.util.HashMap;

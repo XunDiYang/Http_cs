@@ -1,4 +1,4 @@
-package com.socket.http_server_client.model;
+package com.socket.http_cs.model;
 
 public enum HTTP_VERSION {
     HTTP_0_9,

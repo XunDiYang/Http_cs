@@ -1,4 +1,4 @@
-package com.socket.http_server_client.client.view;
+package com.socket.http_cs.client.view;
 
 import android.annotation.SuppressLint;
 import android.content.Intent;
@@ -13,13 +13,13 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.socket.http_server_client.R;
-import com.socket.http_server_client.client.callback.ReadingCallback;
-import com.socket.http_server_client.client.callback.ErrorCallback;
-import com.socket.http_server_client.client.callback.WritingCallback;
-import com.socket.http_server_client.client.service.LongLiveSocket;
-import com.socket.http_server_client.model.CMessage;
-import com.socket.http_server_client.model.MsgType;
+import com.socket.http_cs.R;
+import com.socket.http_cs.client.callback.ReadingCallback;
+import com.socket.http_cs.client.callback.ErrorCallback;
+import com.socket.http_cs.client.callback.WritingCallback;
+import com.socket.http_cs.client.service.LongLiveSocket;
+import com.socket.http_cs.model.CMessage;
+import com.socket.http_cs.model.MsgType;
 
 public class ClientActivity extends AppCompatActivity {
     private String TAG = "CLIENT";

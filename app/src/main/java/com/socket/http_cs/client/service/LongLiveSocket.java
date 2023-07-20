@@ -1,4 +1,4 @@
-package com.socket.http_server_client.client.service;
+package com.socket.http_cs.client.service;
 
 import android.os.Handler;
 import android.os.HandlerThread;
@@ -6,11 +6,11 @@ import android.os.Looper;
 import android.os.StrictMode;
 import android.util.Log;
 
-import com.socket.http_server_client.client.callback.ErrorCallback;
-import com.socket.http_server_client.client.callback.ReadingCallback;
-import com.socket.http_server_client.client.callback.WritingCallback;
-import com.socket.http_server_client.model.CMessage;
-import com.socket.http_server_client.model.MsgType;
+import com.socket.http_cs.client.callback.ErrorCallback;
+import com.socket.http_cs.client.callback.ReadingCallback;
+import com.socket.http_cs.client.callback.WritingCallback;
+import com.socket.http_cs.model.CMessage;
+import com.socket.http_cs.model.MsgType;
 
 import org.json.JSONException;
 

@@ -1,13 +1,13 @@
-package com.socket.http_server_client.server.service;
+package com.socket.http_cs.server.service;
 
 import android.os.Handler;
 import android.util.Log;
 import android.widget.Toast;
 
-import com.socket.http_server_client.model.CMessage;
-import com.socket.http_server_client.model.MsgType;
-import com.socket.http_server_client.server.callback.Callback;
-import com.socket.http_server_client.server.view.ServerActivity;
+import com.socket.http_cs.model.CMessage;
+import com.socket.http_cs.model.MsgType;
+import com.socket.http_cs.server.callback.Callback;
+import com.socket.http_cs.server.view.ServerActivity;
 
 import java.io.DataInputStream;
 import java.io.DataOutputStream;
@@ -28,7 +28,7 @@ public class HttpServer extends TcpServer {
     }
 
     public HttpServer(String serverIp, int port, Callback<Void> rcvMsgCallback) {
-        super(serverIp, port, "com.socket.http_server_client.server.service.HttpServer","com.socket.http_server_client.server.service.HttpServer$HttpHandleClient");
+        super(serverIp, port, "com.socket.http_cs.server.service.HttpServer","com.socket.http_cs.server.service.HttpServer$HttpHandleClient");
         this.rcvMsgCallback = rcvMsgCallback;
     }
 
