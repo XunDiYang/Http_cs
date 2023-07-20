@@ -1,59 +1,91 @@
-package com.socket.http_cs.server.service;
+package com.socket.http_server_client.server.service;
 
 import android.os.Handler;
 import android.util.Log;
-import com.socket.http_cs.model.CMessage;
-import com.socket.http_cs.model.MsgType;
-import com.socket.http_cs.server.callback.Callback;
+import android.widget.Toast;
 
+import com.socket.http_server_client.model.CMessage;
+import com.socket.http_server_client.model.MsgType;
+import com.socket.http_server_client.server.callback.Callback;
+import com.socket.http_server_client.server.view.ServerActivity;
+
+import java.io.DataInputStream;
+import java.io.DataOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
+import java.io.OutputStream;
 import java.net.Socket;
 
-public class HttpServer extends TcpServer{
-    private final String TAG = "TcpServer";
+public class HttpServer extends TcpServer {
+    private static final String TAG = "HttpServer";
+    public static Handler handler = new Handler();
+    public static Callback<Void> rcvMsgCallback;
 
-    private final String serverIp;
-    private final int mPort;
-    private Callback<Void> rcvMsgCallback;
-    private Handler handler;
+    public HttpServer(){
 
-    public HttpServer(String serverIp, int mPort, Callback<Void> rcvMsgCallback) {
-        super(serverIp,mPort,"com.socket.http_cs.server.service.HttpServer.HttpHandleClient");
-        this.serverIp = serverIp;
-        this.mPort = mPort;
-        this.rcvMsgCallback = rcvMsgCallback;
-        handler = new Handler();
     }
 
-    public class HttpHandleClient implements HandleClient{
+    public HttpServer(String serverIp, int port, Callback<Void> rcvMsgCallback) {
+        super(serverIp, port, "com.socket.http_server_client.server.service.HttpServer","com.socket.http_server_client.server.service.HttpServer$HttpHandleClient");
+        this.rcvMsgCallback = rcvMsgCallback;
+    }
+
+    @Override
+    public void start() {
+        super.start();
+    }
+
+    @Override
+    public void stop() throws IOException {
+        super.stop();
+        CMessage cMessage = new CMessage();
+        cMessage.setCode(500);
+        handler.post(() -> rcvMsgCallback.onEvent(cMessage, null));
+    }
+
+    public class HttpHandleClient extends HandleClient {
         Socket client;
-        volatile boolean runHandleClient = true;
-        public void init(Socket s) {
+        volatile boolean runHandleClient;
+
+        @Override
+        public void initClientSocket(Socket s){
             client = s;
+            runHandleClient = true;
         }
+
         @Override
         public void run() {
             try {
-                while (runServer && runHandleClient) {
-                    InputStream in = client.getInputStream();
+                while (runServer && runHandleClient && client != null) {
+                    DataInputStream in = new DataInputStream(client.getInputStream());
                     if (in.available() > 0) {
-                        ObjectInputStream ois = new ObjectInputStream(in);
-                        Object obj = ois.readObject();
-                        Log.d(TAG, "收到消息");
-                        CMessage cMessage = (CMessage) obj;
-                        Object out = new CMessage(cMessage.getTo(), cMessage.getFrom(), cMessage.getCode(), cMessage.getType(), cMessage.getMsg());
+                        Log.i(TAG, "收到消息");
+
+                        CMessage cMessage = new CMessage();
+                        cMessage.setFrom(in.readUTF());
+                        cMessage.setTo(in.readUTF());
+                        cMessage.setCode(in.readInt());
+                        cMessage.setType(in.readInt());
+                        cMessage.setMsg(in.readUTF());
                         cMessage.setMsg("来自" + cMessage.getFrom() + "客户端: " + cMessage.getMsg());
+
                         if (cMessage.getCode() != 200 || cMessage.getType() == MsgType.TEXT) {
                             handler.post(() -> rcvMsgCallback.onEvent(cMessage, null));
                         }
-                        if (out != null) {
-                            ObjectOutputStream oos = new ObjectOutputStream(client.getOutputStream());
-                            oos.writeObject(out);
-                            oos.flush();
-                            Log.d(TAG, "发送消息");
+                        if(cMessage.getCode() == 200 || cMessage.getCode() == 100){
+                            DataOutputStream out = new DataOutputStream(client.getOutputStream());
+                            out.writeUTF((cMessage).getTo());
+                            out.writeUTF((cMessage).getFrom());
+                            out.writeInt((cMessage).getCode());
+                            out.writeInt((cMessage).getType());
+                            out.writeUTF((cMessage).getMsg());
+                            out.flush();
+                            Log.i(TAG, "发送消息");
+                        }
+                        else if (cMessage.getCode() == 400) {
+                            runHandleClient = false;
                         }
                     } else {
                         Thread.sleep(10);
@@ -68,7 +100,7 @@ public class HttpServer extends TcpServer{
             } finally {
                 closeClientSocket();
             }
-            Log.d(TAG, "结束处理数据");
+            Log.i(TAG, "结束处理数据");
         }
 
         @Override
@@ -83,7 +115,7 @@ public class HttpServer extends TcpServer{
                     e.printStackTrace();
                 }
             }
-            Log.d(TAG, "关闭：" + client.getRemoteSocketAddress());
+            Log.i(TAG, "关闭：" + client.getRemoteSocketAddress());
         }
     }
 }
