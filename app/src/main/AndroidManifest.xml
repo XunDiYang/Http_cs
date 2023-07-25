@@ -10,6 +10,10 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Http_cs">
         <activity
+            android:name=".cronet.view.ClientCronetActivity"
+            android:exported="false">
+        </activity>
+        <activity
             android:name=".server.view.ServerStartActivity"
             android:exported="false" />
         <activity
