@@ -14,8 +14,8 @@ import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.socket.http_cs.R;
-import com.socket.http_cs.client.callback.ReadingCallback;
 import com.socket.http_cs.client.callback.ErrorCallback;
+import com.socket.http_cs.client.callback.ReadingCallback;
 import com.socket.http_cs.client.callback.WritingCallback;
 import com.socket.http_cs.client.service.LongLiveSocket;
 import com.socket.http_cs.model.CMessage;

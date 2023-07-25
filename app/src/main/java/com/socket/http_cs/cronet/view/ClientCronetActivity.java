@@ -11,9 +11,9 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.socket.http_server_client.R;
-import com.socket.http_server_client.cronet.service.ChromiumLibraryLoader;
-import com.socket.http_server_client.utils.NetUtils;
+import com.socket.http_cs.cronet.service.ChromiumLibraryLoader;
+import com.socket.http_cs.utils.NetUtils;
+import com.socket.http_cs.R;
 
 import org.chromium.net.CronetEngine;
 import org.chromium.net.CronetException;

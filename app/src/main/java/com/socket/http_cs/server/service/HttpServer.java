@@ -2,8 +2,6 @@ package com.socket.http_cs.server.service;
 
 import android.os.Handler;
 import android.util.Log;
-import android.widget.Toast;
-
 import com.socket.http_cs.model.CMessage;
 import com.socket.http_cs.model.MsgType;
 import com.socket.http_cs.server.callback.Callback;
