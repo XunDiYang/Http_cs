@@ -36,6 +36,14 @@
             android:layout_gravity="center"
             android:text="进入客户端页面"
             android:textSize="30sp"/>
+
+        <Button
+            android:id="@+id/btnCronetClient"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:text="进入Cronet页面"
+            android:textSize="30sp"/>
     </LinearLayout>
 
 
