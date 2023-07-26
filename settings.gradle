@@ -14,3 +14,13 @@ dependencyResolutionManagement {
 }
 rootProject.name = "Http_cs"
 include ':app'
+
+
+// https://segmentfault.com/a/1190000021095757?u_atoken=154a2f39-530c-4c51-96f4-d644da80a1fb&u_asession=01AJ_l8PAjelHSCFBzehzLkm3nwcJLjjwPuGokLBOpfAM54nO7DoDoEGTWabeyYLyuX0KNBwm7Lovlpxjd_P_q4JsKWYrT3W_NKPr8w6oU7K9sO9ZPYldSBPWjLDS2EiaKqKyj-Ku2w-s9yzCW7aTvhWBkFo3NEHBv0PZUm6pbxQU&u_asig=05q8r2ZsHHIKu_fUOmLFMUfTn65MRSKbOjXBCBmGVdZ7P0kToBzd88qeU_Rez0DWb1Ooj_c7Yrh5n73HwrmYpslAkD_BhnoH73emCAFycbI5HJV1VrVF9IcL70C2AD_oqJf7StBvXDasUURF0Gkv6YxG_Y3pR1DhuALqfZkpdzFev9JS7q8ZD7Xtz2Ly-b0kmuyAKRFSVJkkdwVUnyHAIJzTB8xOn54wpngG3Np0FBnrfsrIMi6H3_DBwwJwp9AIyLggefkcQmY4QIKRVIaahK_-3h9VXwMyh6PgyDIVSG1W8if9YD9pybXUtulCXdOjN5DXl5Qyv9s9M4Eprbk8rN2wHF87k9kQw3Bfkn8yKEtVwIsVDkfy2ixuitEwPZWb_kmWspDxyAEEo4kbsryBKb9Q&u_aref=aR9BMz1mN10ihOuiBDF8KUUxqO8%3D
+
+// https://www.cnblogs.com/Mr-East/p/13162830.html
+// https://yanzhenjie.com/AndServer/
+// https://github.com/yanzhenjie/AndServer
+
+// https://chromium.googlesource.com/chromium/src/+/refs/heads/main/net/socket/udp_client_socket.cc
+
