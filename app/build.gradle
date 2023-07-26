@@ -15,61 +15,37 @@ android {
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
 
-    sourceSets {
-        main {
-            jniLibs.srcDirs = ['prebuilt/libs']
-        }
-    }
-
     buildTypes {
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
     }
-    packagingOptions {
-        resources {
-            excludes += '/META-INF/{AL2.0,LGPL2.1}'
-        }
-        resources.excludes.add("META-INF/*")
-    }
     compileOptions {
-        sourceCompatibility JavaVersion.VERSION_1_8
-        targetCompatibility JavaVersion.VERSION_1_8
+        sourceCompatibility JavaVersion.VERSION_11
+        targetCompatibility JavaVersion.VERSION_11
     }
+    sourceSets {
+        main {
+            jniLibs.srcDirs = ['libs/libs']
+        }
+    }
+
     namespace 'com.socket.http_cs'
-    buildFeatures {
-//        compose true
-        buildConfig = true
-    }
-    composeOptions {
-        kotlinCompilerExtensionVersion '1.3.2'
-    }
 }
 
 dependencies {
-    implementation fileTree(dir: 'prebuilt',includes: ['*.jar'])
+    implementation fileTree(dir: 'libs',includes: ['*.jar'])
     implementation 'androidx.appcompat:appcompat:1.6.1'
     implementation 'com.google.android.material:material:1.9.0'
     implementation 'androidx.constraintlayout:constraintlayout:2.1.4'
+    implementation 'com.google.firebase:firebase-crashlytics-buildtools:2.8.1'
     testImplementation 'junit:junit:4.13.2'
     androidTestImplementation 'androidx.test.ext:junit:1.1.5'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.5.1'
-    // https://mvnrepository.com/artifact/at.favre.lib/hkdf
+    implementation group: 'com.google.code.gson', name: 'gson', version: '2.10.1'
     implementation group: 'at.favre.lib', name: 'hkdf', version: '1.0.1'
-
-    // https://mvnrepository.com/artifact/com.google.code.gson/gson
-    implementation group: 'com.google.code.gson', name: 'gson', version: '2.8.9'
-
-
     // https://mvnrepository.com/artifact/commons-cli/commons-cli
     implementation group: 'commons-cli', name: 'commons-cli', version: '1.4'
-
-    implementation 'com.google.net.cronet:cronet-okhttp:VERSION'
-
-    // https://mvnrepository.com/artifact/com.squareup.okhttp3/okhttp
-    implementation group: 'com.squareup.okhttp3', name: 'okhttp', version: '3.2.0'
-
-    implementation "com.google.android.gms:play-services-cronet:18.0.1"
 
 }
